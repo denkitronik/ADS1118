@@ -27,7 +27,7 @@ Connect the ADS1118 CS pin to the pin 5 of your Arduino.
 ```
 Connect the ADS1118 MISO (DOUT), MOSI(DIN) and SCLK pins to the MISO, MOSI and SCLK of your Arduino (search on internet "Arduino ICSP pinout").
 ---------------------------------------------------------------------------
-|ARDUINO (ICSP PINS)		                    	|ADS1118 PINS      |
+|ARDUINO (ICSP PINS)		                    	|ADS1118 PINS     |
 ---------------------------------------------------------------------------
 | MOSI							|	DIN	  |
 | MISO							|	DOUT	  |	
