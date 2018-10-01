@@ -1,0 +1,63 @@
+\hypertarget{union_config}{}\section{Config Union Reference}
+\label{union_config}\index{Config@{Config}}
+
+
+Union configuration register.  
+
+
+
+
+{\ttfamily \#include $<$A\+D\+S1118.\+h$>$}
+
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{union_config_a6a595b692a95c9ee30ba05ddd39983c2}\label{union_config_a6a595b692a95c9ee30ba05ddd39983c2}} 
+\begin{tabbing}
+xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=\kill
+struct \{\\
+\>uint8\_t \mbox{\hyperlink{union_config_a86063c5813b60e24dc4b53620337fb81}{reserved}}:1\\
+\>\>{\em \char`\"{}Reserved\char`\"{} bit }\\
+\>uint8\_t \mbox{\hyperlink{union_config_aca5cedb4ac2d7fa28c9467bcc5dfdd30}{noOperation}}:2\\
+\>\>{\em \char`\"{}NOP\char`\"{} bits }\\
+\>uint8\_t \mbox{\hyperlink{union_config_a384bc94c34f34120311b0fddb47fd310}{pullUp}}:1\\
+\>\>{\em \char`\"{}PULL\_UP\_EN\char`\"{} bit }\\
+\>uint8\_t \mbox{\hyperlink{union_config_a4ded6b547eab12b96dd4aae64ef1e54d}{sensorMode}}:1\\
+\>\>{\em \char`\"{}TS\_MODE\char`\"{} bit }\\
+\>uint8\_t \mbox{\hyperlink{union_config_a36aee2d940c4f67a376a93915d97a82a}{rate}}:3\\
+\>\>{\em \char`\"{}DR\char`\"{} bits }\\
+\>uint8\_t \mbox{\hyperlink{union_config_ab095a91d71a53f3eed6961f99c1fcc8b}{operatingMode}}:1\\
+\>\>{\em \char`\"{}MODE\char`\"{} bit }\\
+\>uint8\_t \mbox{\hyperlink{union_config_a32de00c66e62581dd969c336ac1daae0}{pga}}:3\\
+\>\>{\em \char`\"{}PGA\char`\"{} bits }\\
+\>uint8\_t \mbox{\hyperlink{union_config_a827213c227200ea6d1495fdbd4832cbb}{mux}}:3\\
+\>\>{\em \char`\"{}MUX\char`\"{} bits }\\
+\>uint8\_t \mbox{\hyperlink{union_config_a75dfa0206a4d86658d165163040905d7}{singleStart}}:1\\
+\>\>{\em \char`\"{}SS\char`\"{} bit }\\
+\} \mbox{\hyperlink{union_config_a6a595b692a95c9ee30ba05ddd39983c2}{bits}}\\
+
+\end{tabbing}\begin{DoxyCompactList}\small\item\em Structure of the config register of the \mbox{\hyperlink{class_a_d_s1118}{A\+D\+S1118}}. (See datasheet \mbox{[}1\mbox{]}) \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{union_config_a5f72e077843f5c9e51cdeb6ef2510df9}\label{union_config_a5f72e077843f5c9e51cdeb6ef2510df9}} 
+uint16\+\_\+t \mbox{\hyperlink{union_config_a5f72e077843f5c9e51cdeb6ef2510df9}{word}}
+\begin{DoxyCompactList}\small\item\em Representation in word (16-\/bits) format. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{union_config_a35780eea5f07b69335bdfd7754eb12f1}\label{union_config_a35780eea5f07b69335bdfd7754eb12f1}} 
+\begin{tabbing}
+xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=\kill
+struct \{\\
+\>uint8\_t \mbox{\hyperlink{union_config_a39309b66a0f5c8ccd880c13f0fff6b71}{lsb}}\\
+\>\>{\em Byte LSB. }\\
+\>uint8\_t \mbox{\hyperlink{union_config_a8ac34c174b84a90b17260847ddf749d7}{msb}}\\
+\>\>{\em Byte MSB. }\\
+\} \mbox{\hyperlink{union_config_a35780eea5f07b69335bdfd7754eb12f1}{byte}}\\
+
+\end{tabbing}\begin{DoxyCompactList}\small\item\em Representation in bytes (8-\/bits) format. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Union configuration register. 
+
+Union representing the \char`\"{}config register\char`\"{} in 3 ways\+: bits, word (16 bits) and nibbles (4 bits) (See the datasheet \mbox{[}1\mbox{]} for more information) 
+
+The documentation for this union was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+A\+D\+S1118.\+h\end{DoxyCompactItemize}

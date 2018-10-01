@@ -98,10 +98,10 @@ uint16_t ADS1118::getADCValue(uint8_t inputs) {
 	configRegister.bits.mux=inputs;
     do{	
 		digitalWrite(cs, LOW);
-		dataMSB = SPI.transfer(configRegister.nibble.msb);
-		dataLSB = SPI.transfer(configRegister.nibble.lsb);
-		configMSB = SPI.transfer(configRegister.nibble.msb);
-		configLSB = SPI.transfer(configRegister.nibble.lsb);
+		dataMSB = SPI.transfer(configRegister.byte.msb);
+		dataLSB = SPI.transfer(configRegister.byte.lsb);
+		configMSB = SPI.transfer(configRegister.byte.msb);
+		configLSB = SPI.transfer(configRegister.byte.lsb);
 		digitalWrite(cs, HIGH);
 		for(int i=0;i<CONV_TIME[configRegister.bits.rate];i++) //Lets wait the conversion time
 			delayMicroseconds(1000);
@@ -164,10 +164,10 @@ double ADS1118::getTemperature() {
 		configRegister.bits.sensorMode=TEMP_MODE; //Sorry but we will have to read twice the sensor
     do{
 		digitalWrite(cs, LOW);
-		dataMSB = SPI.transfer(configRegister.nibble.msb);
-		dataLSB = SPI.transfer(configRegister.nibble.lsb);
-		configMSB = SPI.transfer(configRegister.nibble.msb);
-		configLSB = SPI.transfer(configRegister.nibble.lsb);
+		dataMSB = SPI.transfer(configRegister.byte.msb);
+		dataLSB = SPI.transfer(configRegister.byte.lsb);
+		configMSB = SPI.transfer(configRegister.byte.msb);
+		configLSB = SPI.transfer(configRegister.byte.lsb);
 		digitalWrite(cs, HIGH);
 		for(int i=0;i<CONV_TIME[configRegister.bits.rate];i++) //Lets wait the conversion time
 			delayMicroseconds(1000);

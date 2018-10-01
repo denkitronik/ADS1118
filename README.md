@@ -1,36 +1,62 @@
-# ADS1118 Arduino Library
-The offical HydroSense library for the TI ADS1118 16-Bit ADC chip.
+# Arduino Library for Texas Instruments ADS1118 - 16-Bit Analog-to-Digital Converter with internal Reference and Temperature Sensor
 
-Created By: Colby Rome (cdr013@bucknell.edu)
-Last Updated By: Ward Prescott (erp006@bucknell.edu) on Mar 9, 2016 12:08 AM
+This is an easy to use Arduino library for ADC Converter ADS1118
 
-## ADS1118 Class
-### Constructor
-`Ads1118(int CS_pin)`
-### Methods
-- `.begin(void)`
-- `adsRead(int port)`returns the floating point representation of the voltage at the port.  Macros for the different ports are defined in the header file and are:
-	- DIF01
-	- DIF23
-	- AIN0
-	- AIN1
-	- AIN2
-	- AIN3
-- `readTemp(void)` is being debugged and may or may not work.
-- `setGain(int GainSet)` 
-- `selfTest(void)` the method returns1 if there is an error communicating with the device.  This may be due to a wiring problem or other SPI error.
+## Getting Started
 
-### Parameters
-There no public parameters of interest.
+Learn with the examples provided: For basic use "basicExampleAds1118" and "ads1118example" for a detailed use.
 
-## Usage
-Clone repository into your Arduino libraries folder (typically ~/Arduino/libraries/)
+### Prerequisites
 
-See the examples folder.
+None
 
-## Notes
-None yet.
 
-## Further Work
-1. Temperature readings
-2. Low power mode (current it is set to constantly sample)
+### Installing
+
+Download or clone this project in the "libraries" folder of your Arduino folder.
+
+## Running the tests
+```
+Connect the ADS1118 in the 3.3v power supply pins of your Arduino.
+```
+
+```
+Connect the ADS1118 CS pin to the pin 5 of your Arduino.
+```
+
+```
+Connect the ADS1118 MISO (DOUT), MOSI(DIN) and SCLK pins to the MISO, MOSI and SCLK of your Arduino (search on internet "Arduino ICSP pinout").
+-------------------------------------------------------
+|ARDUINO (ICSP PINS)					|ADS1118 PINS |
+-------------------------------------------------------
+| MOSI									|	DIN		  |
+| MISO									|	DOUT	  |	
+| SCLK									|	SCLK 	  |
+| 5 (change this pin to fit your needs)	|	CS		  |
+-------------------------------------------------------
+```
+
+```
+Run the examples provided in your Arduino IDE.
+```
+
+## Built With
+
+* [Arduino IDE](https://www.arduino.cc/)
+
+## Contributing
+
+Everyone is invited to contribute
+When contributing to this repository, please first discuss the change you wish to make via issue, email, or any other method with me before making a change.
+
+## Versioning
+
+I am using [SemVer](http://semver.org/) for versioning. 
+
+## Authors
+
+* **Alvaro Salazar** - *Initial work* - [alvaro-salazar](https://github.com/alvaro-salazar)
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.

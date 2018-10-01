@@ -1,0 +1,347 @@
+\hypertarget{class_a_d_s1118}{}\section{A\+D\+S1118 Class Reference}
+\label{class_a_d_s1118}\index{A\+D\+S1118@{A\+D\+S1118}}
+
+
+{\ttfamily \#include $<$A\+D\+S1118.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_a_d_s1118_afaddf1d46e3b32d433c67122d96a6ebb}{A\+D\+S1118}} (uint8\+\_\+t io\+\_\+pin\+\_\+cs)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_a_d_s1118_a817f1a7619d97e19475458dc3eea5f88}{begin}} ()
+\begin{DoxyCompactList}\small\item\em This method initialize the S\+PI port and the config register. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{class_a_d_s1118_acf67a3c09b9d165f04e2e37e618e4fcb}{get\+Temperature}} ()
+\begin{DoxyCompactList}\small\item\em Getting the temperature in degrees celsius from the internal sensor of the \mbox{\hyperlink{class_a_d_s1118}{A\+D\+S1118}}. \end{DoxyCompactList}\item 
+uint16\+\_\+t \mbox{\hyperlink{class_a_d_s1118_adf872650d20977b5872f88fa36182d3a}{get\+A\+D\+C\+Value}} (uint8\+\_\+t inputs)
+\begin{DoxyCompactList}\small\item\em Getting a sample from the specified input. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{class_a_d_s1118_a11e4c070217773d71da1d22506e64c00}{get\+Milli\+Volts}} (uint8\+\_\+t inputs)
+\begin{DoxyCompactList}\small\item\em Getting the millivolts from the specified inputs. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{class_a_d_s1118_a5d88241e78575ca86f6206f02cec0614}{get\+Milli\+Volts}} ()
+\begin{DoxyCompactList}\small\item\em Getting the millivolts from the settled inputs. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_a_d_s1118_a8d79b157a07574bd8745137a8347649e}{decode\+Config\+Register}} (union \mbox{\hyperlink{union_config}{Config}} \mbox{\hyperlink{class_a_d_s1118_ab41e0ba159527f2fc8d48cbedc653380}{config\+Register}})
+\begin{DoxyCompactList}\small\item\em Decoding a config\+Register structure and then print it out to the Serial port. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_a_d_s1118_abcabaf741cc3e45e53a6967e0d113073}{set\+Samplig\+Rate}} (uint8\+\_\+t sampling\+Rate)
+\begin{DoxyCompactList}\small\item\em Setting the sampling rate specified in the config register. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_a_d_s1118_a15fcd99b88c988fef9b4cc04347b08a5}{set\+Full\+Scale\+Range}} (uint8\+\_\+t fsr)
+\begin{DoxyCompactList}\small\item\em Setting the full scale range in the config register. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_a_d_s1118_af739fb00547d7a5df8c5010c40b64c6a}{set\+Continuous\+Mode}} ()
+\begin{DoxyCompactList}\small\item\em Setting to continuous adquisition mode. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_a_d_s1118_a9e2e456dee0ee957fe89319d12bd833c}{set\+Single\+Shot\+Mode}} ()
+\begin{DoxyCompactList}\small\item\em Setting to single shot adquisition and power down mode. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_a_d_s1118_a649c53bdf46a93b5ab682d04b9f9df5e}{disable\+Pullup}} ()
+\begin{DoxyCompactList}\small\item\em Disabling the internal pull-\/up resistor of the D\+O\+UT pin. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_a_d_s1118_a833326b882b86608d62450fcedabbe4a}{enable\+Pullup}} ()
+\begin{DoxyCompactList}\small\item\em Enabling the internal pull-\/up resistor of the D\+O\+UT pin. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_a_d_s1118_a074c71a9eeb1d0db946f5f4b1308c69f}{set\+Input\+Selected}} (uint8\+\_\+t input)
+\begin{DoxyCompactList}\small\item\em Setting the inputs to be adquired in the config register. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_a_d_s1118_ad655c0ffe0e3fb2c8c2644176c67f1aa}\label{class_a_d_s1118_ad655c0ffe0e3fb2c8c2644176c67f1aa}} 
+const uint8\+\_\+t \mbox{\hyperlink{class_a_d_s1118_ad655c0ffe0e3fb2c8c2644176c67f1aa}{D\+I\+F\+F\+\_\+0\+\_\+1}} = 0b000
+\begin{DoxyCompactList}\small\item\em Differential input\+: Vin=A0-\/\+A1. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_a_d_s1118_a1caeae913293ef4806516976a2dc7f4b}\label{class_a_d_s1118_a1caeae913293ef4806516976a2dc7f4b}} 
+const uint8\+\_\+t \mbox{\hyperlink{class_a_d_s1118_a1caeae913293ef4806516976a2dc7f4b}{D\+I\+F\+F\+\_\+0\+\_\+3}} = 0b001
+\begin{DoxyCompactList}\small\item\em Differential input\+: Vin=A0-\/\+A3. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_a_d_s1118_a683b66748ece91703c8ccc1920a6f762}\label{class_a_d_s1118_a683b66748ece91703c8ccc1920a6f762}} 
+const uint8\+\_\+t \mbox{\hyperlink{class_a_d_s1118_a683b66748ece91703c8ccc1920a6f762}{D\+I\+F\+F\+\_\+1\+\_\+3}} = 0b010
+\begin{DoxyCompactList}\small\item\em Differential input\+: Vin=A1-\/\+A3. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_a_d_s1118_a8e9e4f86cb2487a24b539c2f7424324d}\label{class_a_d_s1118_a8e9e4f86cb2487a24b539c2f7424324d}} 
+const uint8\+\_\+t \mbox{\hyperlink{class_a_d_s1118_a8e9e4f86cb2487a24b539c2f7424324d}{D\+I\+F\+F\+\_\+2\+\_\+3}} = 0b011
+\begin{DoxyCompactList}\small\item\em Differential input\+: Vin=A2-\/\+A3. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_a_d_s1118_aca6400b67c3254276ac2bee98153ce1b}\label{class_a_d_s1118_aca6400b67c3254276ac2bee98153ce1b}} 
+const uint8\+\_\+t \mbox{\hyperlink{class_a_d_s1118_aca6400b67c3254276ac2bee98153ce1b}{A\+I\+N\+\_\+0}} = 0b100
+\begin{DoxyCompactList}\small\item\em Single ended input\+: Vin=A0. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_a_d_s1118_a252939e56baf2c563a81778d36471b57}\label{class_a_d_s1118_a252939e56baf2c563a81778d36471b57}} 
+const uint8\+\_\+t \mbox{\hyperlink{class_a_d_s1118_a252939e56baf2c563a81778d36471b57}{A\+I\+N\+\_\+1}} = 0b101
+\begin{DoxyCompactList}\small\item\em Single ended input\+: Vin=A1. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_a_d_s1118_ae54c53aaa6546ca3d6ff0a5f94bca2da}\label{class_a_d_s1118_ae54c53aaa6546ca3d6ff0a5f94bca2da}} 
+const uint8\+\_\+t \mbox{\hyperlink{class_a_d_s1118_ae54c53aaa6546ca3d6ff0a5f94bca2da}{A\+I\+N\+\_\+2}} = 0b110
+\begin{DoxyCompactList}\small\item\em Single ended input\+: Vin=A2. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_a_d_s1118_a960aed37cacaba71cdc4d4761bce7fd4}\label{class_a_d_s1118_a960aed37cacaba71cdc4d4761bce7fd4}} 
+const uint8\+\_\+t \mbox{\hyperlink{class_a_d_s1118_a960aed37cacaba71cdc4d4761bce7fd4}{A\+I\+N\+\_\+3}} = 0b111
+\begin{DoxyCompactList}\small\item\em Single ended input\+: Vin=A3. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_a_d_s1118_ab41e0ba159527f2fc8d48cbedc653380}\label{class_a_d_s1118_ab41e0ba159527f2fc8d48cbedc653380}} 
+union \mbox{\hyperlink{union_config}{Config}} \mbox{\hyperlink{class_a_d_s1118_ab41e0ba159527f2fc8d48cbedc653380}{config\+Register}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{union_config}{Config}} register. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_a_d_s1118_a2e1f9b252a8468439c3c4a8b46ec5b9e}\label{class_a_d_s1118_a2e1f9b252a8468439c3c4a8b46ec5b9e}} 
+const uint16\+\_\+t \mbox{\hyperlink{class_a_d_s1118_a2e1f9b252a8468439c3c4a8b46ec5b9e}{S\+C\+LK}} = 2000000
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{class_a_d_s1118}{A\+D\+S1118}} S\+C\+LK frequency\+: 4000000 Hz Maximum for \mbox{\hyperlink{class_a_d_s1118}{A\+D\+S1118}}. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_a_d_s1118_af146984531345834e8caaf0ffe017735}\label{class_a_d_s1118_af146984531345834e8caaf0ffe017735}} 
+const uint8\+\_\+t \mbox{\hyperlink{class_a_d_s1118_af146984531345834e8caaf0ffe017735}{S\+T\+A\+R\+T\+\_\+\+N\+OW}} = 1
+\begin{DoxyCompactList}\small\item\em Start of conversion in single-\/shot mode. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_a_d_s1118_ace81e16e9c09d65487c451dbc0c86cc5}\label{class_a_d_s1118_ace81e16e9c09d65487c451dbc0c86cc5}} 
+const uint8\+\_\+t \mbox{\hyperlink{class_a_d_s1118_ace81e16e9c09d65487c451dbc0c86cc5}{A\+D\+C\+\_\+\+M\+O\+DE}} = 0
+\begin{DoxyCompactList}\small\item\em External (inputs) voltage reading mode. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_a_d_s1118_aae519c1c967c59c8d40e06f7517fca0c}\label{class_a_d_s1118_aae519c1c967c59c8d40e06f7517fca0c}} 
+const uint8\+\_\+t \mbox{\hyperlink{class_a_d_s1118_aae519c1c967c59c8d40e06f7517fca0c}{T\+E\+M\+P\+\_\+\+M\+O\+DE}} = 1
+\begin{DoxyCompactList}\small\item\em Internal temperature sensor reading mode. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_a_d_s1118_ac79cd7f4808c3b4ff2721e2e8b6140ba}\label{class_a_d_s1118_ac79cd7f4808c3b4ff2721e2e8b6140ba}} 
+const uint8\+\_\+t \mbox{\hyperlink{class_a_d_s1118_ac79cd7f4808c3b4ff2721e2e8b6140ba}{C\+O\+N\+T\+I\+N\+U\+O\+US}} = 0
+\begin{DoxyCompactList}\small\item\em Continuous conversion mode. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_a_d_s1118_a71a3c608158cd617c24b51986f2fccc0}\label{class_a_d_s1118_a71a3c608158cd617c24b51986f2fccc0}} 
+const uint8\+\_\+t \mbox{\hyperlink{class_a_d_s1118_a71a3c608158cd617c24b51986f2fccc0}{S\+I\+N\+G\+L\+E\+\_\+\+S\+H\+OT}} = 1
+\begin{DoxyCompactList}\small\item\em Single-\/shot conversion and power down mode. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_a_d_s1118_ab5035f17d58adff567e8002d3e5c40fa}\label{class_a_d_s1118_ab5035f17d58adff567e8002d3e5c40fa}} 
+const uint8\+\_\+t \mbox{\hyperlink{class_a_d_s1118_ab5035f17d58adff567e8002d3e5c40fa}{P\+U\+L\+L\+UP}} = 1
+\begin{DoxyCompactList}\small\item\em Internal pull-\/up resistor enabled for D\+O\+UT $\ast$$\ast$$\ast$\+D\+E\+F\+A\+U\+LT. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_a_d_s1118_a9c4404b5040ec1b5f43094961e2f62d5}\label{class_a_d_s1118_a9c4404b5040ec1b5f43094961e2f62d5}} 
+const uint8\+\_\+t \mbox{\hyperlink{class_a_d_s1118_a9c4404b5040ec1b5f43094961e2f62d5}{N\+O\+\_\+\+P\+U\+L\+L\+UP}} = 0
+\begin{DoxyCompactList}\small\item\em Internal pull-\/up resistor disabled. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_a_d_s1118_afc7ff1f66a8cda9826daeaf3fe5ba6ab}\label{class_a_d_s1118_afc7ff1f66a8cda9826daeaf3fe5ba6ab}} 
+const uint8\+\_\+t \mbox{\hyperlink{class_a_d_s1118_afc7ff1f66a8cda9826daeaf3fe5ba6ab}{V\+A\+L\+I\+D\+\_\+\+C\+FG}} = 0b01
+\begin{DoxyCompactList}\small\item\em Data will be written to \mbox{\hyperlink{union_config}{Config}} register. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_a_d_s1118_aca0198f642c007b7ae32728ecc7b4b1f}\label{class_a_d_s1118_aca0198f642c007b7ae32728ecc7b4b1f}} 
+const uint8\+\_\+t \mbox{\hyperlink{class_a_d_s1118_aca0198f642c007b7ae32728ecc7b4b1f}{N\+O\+\_\+\+V\+A\+L\+I\+D\+\_\+\+C\+FG}} = 0b00
+\begin{DoxyCompactList}\small\item\em Data won\textquotesingle{}t be written to \mbox{\hyperlink{union_config}{Config}} register. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_a_d_s1118_addf0469ded07f0cf2c7566745a9bf197}\label{class_a_d_s1118_addf0469ded07f0cf2c7566745a9bf197}} 
+const uint8\+\_\+t \mbox{\hyperlink{class_a_d_s1118_addf0469ded07f0cf2c7566745a9bf197}{R\+E\+S\+E\+R\+V\+ED}} = 1
+\begin{DoxyCompactList}\small\item\em Its value is always 1, reserved. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_a_d_s1118_afc58ecaefacef5592c90c4c843d81dde}\label{class_a_d_s1118_afc58ecaefacef5592c90c4c843d81dde}} 
+const uint8\+\_\+t \mbox{\hyperlink{class_a_d_s1118_afc58ecaefacef5592c90c4c843d81dde}{F\+S\+R\+\_\+6144}} = 0b000
+\begin{DoxyCompactList}\small\item\em Range\+: ±6.144 v. L\+SB S\+I\+ZE = 187.\+5μV. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_a_d_s1118_a9ef5d9e47353e4e30ceab533e2edf3ad}\label{class_a_d_s1118_a9ef5d9e47353e4e30ceab533e2edf3ad}} 
+const uint8\+\_\+t \mbox{\hyperlink{class_a_d_s1118_a9ef5d9e47353e4e30ceab533e2edf3ad}{F\+S\+R\+\_\+4096}} = 0b001
+\begin{DoxyCompactList}\small\item\em Range\+: ±4.096 v. L\+SB S\+I\+ZE = 125μV. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_a_d_s1118_a2acfebaaa24ac5a6925be110a5a3edfa}\label{class_a_d_s1118_a2acfebaaa24ac5a6925be110a5a3edfa}} 
+const uint8\+\_\+t \mbox{\hyperlink{class_a_d_s1118_a2acfebaaa24ac5a6925be110a5a3edfa}{F\+S\+R\+\_\+2048}} = 0b010
+\begin{DoxyCompactList}\small\item\em Range\+: ±2.048 v. L\+SB S\+I\+ZE = 62.\+5μV $\ast$$\ast$$\ast$\+D\+E\+F\+A\+U\+LT. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_a_d_s1118_a64ab7dc3b0b643889a45b4a8a15ed73b}\label{class_a_d_s1118_a64ab7dc3b0b643889a45b4a8a15ed73b}} 
+const uint8\+\_\+t \mbox{\hyperlink{class_a_d_s1118_a64ab7dc3b0b643889a45b4a8a15ed73b}{F\+S\+R\+\_\+1024}} = 0b011
+\begin{DoxyCompactList}\small\item\em Range\+: ±1.024 v. L\+SB S\+I\+ZE = 31.\+25μV. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_a_d_s1118_aa90c0882b487e68fa6cfe27790d6a5fa}\label{class_a_d_s1118_aa90c0882b487e68fa6cfe27790d6a5fa}} 
+const uint8\+\_\+t \mbox{\hyperlink{class_a_d_s1118_aa90c0882b487e68fa6cfe27790d6a5fa}{F\+S\+R\+\_\+0512}} = 0b100
+\begin{DoxyCompactList}\small\item\em Range\+: ±0.512 v. L\+SB S\+I\+ZE = 15.\+625μV. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_a_d_s1118_a5b0abd4476219e551141a10c1266c451}\label{class_a_d_s1118_a5b0abd4476219e551141a10c1266c451}} 
+const uint8\+\_\+t \mbox{\hyperlink{class_a_d_s1118_a5b0abd4476219e551141a10c1266c451}{F\+S\+R\+\_\+0256}} = 0b111
+\begin{DoxyCompactList}\small\item\em Range\+: ±0.256 v. L\+SB S\+I\+ZE = 7.\+8125μV. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_a_d_s1118_a693fdcb47c270a6f3244df1eefdca4ca}\label{class_a_d_s1118_a693fdcb47c270a6f3244df1eefdca4ca}} 
+const uint8\+\_\+t \mbox{\hyperlink{class_a_d_s1118_a693fdcb47c270a6f3244df1eefdca4ca}{R\+A\+T\+E\+\_\+8\+S\+PS}} = 0b000
+\begin{DoxyCompactList}\small\item\em 8 samples/s, Tconv=125ms \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_a_d_s1118_a6b92ca329799360f0dfc19bec589280c}\label{class_a_d_s1118_a6b92ca329799360f0dfc19bec589280c}} 
+const uint8\+\_\+t \mbox{\hyperlink{class_a_d_s1118_a6b92ca329799360f0dfc19bec589280c}{R\+A\+T\+E\+\_\+16\+S\+PS}} = 0b001
+\begin{DoxyCompactList}\small\item\em 16 samples/s, Tconv=62.\+5ms \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_a_d_s1118_af9f2d072f99bdce404c613135ba07829}\label{class_a_d_s1118_af9f2d072f99bdce404c613135ba07829}} 
+const uint8\+\_\+t \mbox{\hyperlink{class_a_d_s1118_af9f2d072f99bdce404c613135ba07829}{R\+A\+T\+E\+\_\+32\+S\+PS}} = 0b010
+\begin{DoxyCompactList}\small\item\em 32 samples/s, Tconv=31.\+25ms \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_a_d_s1118_a6f1e5499c69409830f3dad1c0c66fc07}\label{class_a_d_s1118_a6f1e5499c69409830f3dad1c0c66fc07}} 
+const uint8\+\_\+t \mbox{\hyperlink{class_a_d_s1118_a6f1e5499c69409830f3dad1c0c66fc07}{R\+A\+T\+E\+\_\+64\+S\+PS}} = 0b011
+\begin{DoxyCompactList}\small\item\em 64 samples/s, Tconv=15.\+625ms \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_a_d_s1118_a10ab539a0704cc42d3441f3c94a9a649}\label{class_a_d_s1118_a10ab539a0704cc42d3441f3c94a9a649}} 
+const uint8\+\_\+t \mbox{\hyperlink{class_a_d_s1118_a10ab539a0704cc42d3441f3c94a9a649}{R\+A\+T\+E\+\_\+128\+S\+PS}} = 0b100
+\begin{DoxyCompactList}\small\item\em 128 samples/s, Tconv=7.\+8125ms \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_a_d_s1118_a6deae5bd5b8578a481b376349edcebe1}\label{class_a_d_s1118_a6deae5bd5b8578a481b376349edcebe1}} 
+const uint8\+\_\+t \mbox{\hyperlink{class_a_d_s1118_a6deae5bd5b8578a481b376349edcebe1}{R\+A\+T\+E\+\_\+250\+S\+PS}} = 0b101
+\begin{DoxyCompactList}\small\item\em 250 samples/s, Tconv=4ms \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_a_d_s1118_a5682051293d721f5efc05d05f997d150}\label{class_a_d_s1118_a5682051293d721f5efc05d05f997d150}} 
+const uint8\+\_\+t \mbox{\hyperlink{class_a_d_s1118_a5682051293d721f5efc05d05f997d150}{R\+A\+T\+E\+\_\+475\+S\+PS}} = 0b110
+\begin{DoxyCompactList}\small\item\em 475 samples/s, Tconv=2.\+105ms \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_a_d_s1118_adaff9f6a747f4b3b6cb10608b8581ab0}\label{class_a_d_s1118_adaff9f6a747f4b3b6cb10608b8581ab0}} 
+const uint8\+\_\+t \mbox{\hyperlink{class_a_d_s1118_adaff9f6a747f4b3b6cb10608b8581ab0}{R\+A\+T\+E\+\_\+860\+S\+PS}} = 0b111
+\begin{DoxyCompactList}\small\item\em 860 samples/s, Tconv=1.\+163ms \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Class representing the \mbox{\hyperlink{class_a_d_s1118}{A\+D\+S1118}} sensor chip \begin{DoxyAuthor}{Author}
+Alvaro Salazar \href{mailto:alvaro@denkitronik.com}{\tt alvaro@denkitronik.\+com} 
+\end{DoxyAuthor}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_a_d_s1118_afaddf1d46e3b32d433c67122d96a6ebb}\label{class_a_d_s1118_afaddf1d46e3b32d433c67122d96a6ebb}} 
+\index{A\+D\+S1118@{A\+D\+S1118}!A\+D\+S1118@{A\+D\+S1118}}
+\index{A\+D\+S1118@{A\+D\+S1118}!A\+D\+S1118@{A\+D\+S1118}}
+\subsubsection{\texorpdfstring{A\+D\+S1118()}{ADS1118()}}
+{\footnotesize\ttfamily A\+D\+S1118\+::\+A\+D\+S1118 (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{io\+\_\+pin\+\_\+cs }\end{DoxyParamCaption})}
+
+
+
+Constructor. 
+
+Constructor of the class 
+\begin{DoxyParams}{Parameters}
+{\em io\+\_\+pin\+\_\+cs} & a byte indicating the pin to be use as the chip select pin (CS) \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_a_d_s1118_a817f1a7619d97e19475458dc3eea5f88}\label{class_a_d_s1118_a817f1a7619d97e19475458dc3eea5f88}} 
+\index{A\+D\+S1118@{A\+D\+S1118}!begin@{begin}}
+\index{begin@{begin}!A\+D\+S1118@{A\+D\+S1118}}
+\subsubsection{\texorpdfstring{begin()}{begin()}}
+{\footnotesize\ttfamily void A\+D\+S1118\+::begin (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+This method initialize the S\+PI port and the config register. 
+
+This method initialize the S\+PI port and the config register \mbox{\Hypertarget{class_a_d_s1118_a8d79b157a07574bd8745137a8347649e}\label{class_a_d_s1118_a8d79b157a07574bd8745137a8347649e}} 
+\index{A\+D\+S1118@{A\+D\+S1118}!decode\+Config\+Register@{decode\+Config\+Register}}
+\index{decode\+Config\+Register@{decode\+Config\+Register}!A\+D\+S1118@{A\+D\+S1118}}
+\subsubsection{\texorpdfstring{decode\+Config\+Register()}{decodeConfigRegister()}}
+{\footnotesize\ttfamily void A\+D\+S1118\+::decode\+Config\+Register (\begin{DoxyParamCaption}\item[{union \mbox{\hyperlink{union_config}{Config}}}]{config\+Register }\end{DoxyParamCaption})}
+
+
+
+Decoding a config\+Register structure and then print it out to the Serial port. 
+
+Decoding a config\+Register structure and then print it out to the Serial port 
+\begin{DoxyParams}{Parameters}
+{\em config\+Register} & The config register in \char`\"{}union Config\char`\"{} format \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_a_d_s1118_a649c53bdf46a93b5ab682d04b9f9df5e}\label{class_a_d_s1118_a649c53bdf46a93b5ab682d04b9f9df5e}} 
+\index{A\+D\+S1118@{A\+D\+S1118}!disable\+Pullup@{disable\+Pullup}}
+\index{disable\+Pullup@{disable\+Pullup}!A\+D\+S1118@{A\+D\+S1118}}
+\subsubsection{\texorpdfstring{disable\+Pullup()}{disablePullup()}}
+{\footnotesize\ttfamily void A\+D\+S1118\+::disable\+Pullup (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Disabling the internal pull-\/up resistor of the D\+O\+UT pin. 
+
+Disabling the internal pull-\/up resistor of the D\+O\+UT pin \mbox{\Hypertarget{class_a_d_s1118_a833326b882b86608d62450fcedabbe4a}\label{class_a_d_s1118_a833326b882b86608d62450fcedabbe4a}} 
+\index{A\+D\+S1118@{A\+D\+S1118}!enable\+Pullup@{enable\+Pullup}}
+\index{enable\+Pullup@{enable\+Pullup}!A\+D\+S1118@{A\+D\+S1118}}
+\subsubsection{\texorpdfstring{enable\+Pullup()}{enablePullup()}}
+{\footnotesize\ttfamily void A\+D\+S1118\+::enable\+Pullup (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Enabling the internal pull-\/up resistor of the D\+O\+UT pin. 
+
+Enabling the internal pull-\/up resistor of the D\+O\+UT pin \mbox{\Hypertarget{class_a_d_s1118_adf872650d20977b5872f88fa36182d3a}\label{class_a_d_s1118_adf872650d20977b5872f88fa36182d3a}} 
+\index{A\+D\+S1118@{A\+D\+S1118}!get\+A\+D\+C\+Value@{get\+A\+D\+C\+Value}}
+\index{get\+A\+D\+C\+Value@{get\+A\+D\+C\+Value}!A\+D\+S1118@{A\+D\+S1118}}
+\subsubsection{\texorpdfstring{get\+A\+D\+C\+Value()}{getADCValue()}}
+{\footnotesize\ttfamily uint16\+\_\+t A\+D\+S1118\+::get\+A\+D\+C\+Value (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{inputs }\end{DoxyParamCaption})}
+
+
+
+Getting a sample from the specified input. 
+
+Getting a sample from the specified input 
+\begin{DoxyParams}{Parameters}
+{\em inputs} & Sets the input of the A\+DC\+: Diferential inputs\+: D\+I\+F\+F\+\_\+0\+\_\+1, D\+I\+F\+F\+\_\+0\+\_\+3, D\+I\+F\+F\+\_\+1\+\_\+3, D\+I\+F\+F\+\_\+2\+\_\+3. Single ended input\+: A\+I\+N\+\_\+0, A\+I\+N\+\_\+1, A\+I\+N\+\_\+2, A\+I\+N\+\_\+3 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A word containing the A\+DC value 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_a_d_s1118_a11e4c070217773d71da1d22506e64c00}\label{class_a_d_s1118_a11e4c070217773d71da1d22506e64c00}} 
+\index{A\+D\+S1118@{A\+D\+S1118}!get\+Milli\+Volts@{get\+Milli\+Volts}}
+\index{get\+Milli\+Volts@{get\+Milli\+Volts}!A\+D\+S1118@{A\+D\+S1118}}
+\subsubsection{\texorpdfstring{get\+Milli\+Volts()}{getMilliVolts()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily double A\+D\+S1118\+::get\+Milli\+Volts (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{inputs }\end{DoxyParamCaption})}
+
+
+
+Getting the millivolts from the specified inputs. 
+
+Getting the millivolts from the specified inputs 
+\begin{DoxyParams}{Parameters}
+{\em inputs} & Sets the inputs to be adquired. Diferential inputs\+: D\+I\+F\+F\+\_\+0\+\_\+1, D\+I\+F\+F\+\_\+0\+\_\+3, D\+I\+F\+F\+\_\+1\+\_\+3, D\+I\+F\+F\+\_\+2\+\_\+3. Single ended input\+: A\+I\+N\+\_\+0, A\+I\+N\+\_\+1, A\+I\+N\+\_\+2, A\+I\+N\+\_\+3 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A double (32bits) containing the A\+DC value in millivolts 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_a_d_s1118_a5d88241e78575ca86f6206f02cec0614}\label{class_a_d_s1118_a5d88241e78575ca86f6206f02cec0614}} 
+\index{A\+D\+S1118@{A\+D\+S1118}!get\+Milli\+Volts@{get\+Milli\+Volts}}
+\index{get\+Milli\+Volts@{get\+Milli\+Volts}!A\+D\+S1118@{A\+D\+S1118}}
+\subsubsection{\texorpdfstring{get\+Milli\+Volts()}{getMilliVolts()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily double A\+D\+S1118\+::get\+Milli\+Volts (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Getting the millivolts from the settled inputs. 
+
+Getting the millivolts from the settled inputs \begin{DoxyReturn}{Returns}
+A double (32bits) containing the A\+DC value in millivolts 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_a_d_s1118_acf67a3c09b9d165f04e2e37e618e4fcb}\label{class_a_d_s1118_acf67a3c09b9d165f04e2e37e618e4fcb}} 
+\index{A\+D\+S1118@{A\+D\+S1118}!get\+Temperature@{get\+Temperature}}
+\index{get\+Temperature@{get\+Temperature}!A\+D\+S1118@{A\+D\+S1118}}
+\subsubsection{\texorpdfstring{get\+Temperature()}{getTemperature()}}
+{\footnotesize\ttfamily double A\+D\+S1118\+::get\+Temperature (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Getting the temperature in degrees celsius from the internal sensor of the \mbox{\hyperlink{class_a_d_s1118}{A\+D\+S1118}}. 
+
+Getting the temperature in degrees celsius from the internal sensor of the \mbox{\hyperlink{class_a_d_s1118}{A\+D\+S1118}} \begin{DoxyReturn}{Returns}
+A double (32bits) containing the temperature in degrees celsius of the internal sensor 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_a_d_s1118_af739fb00547d7a5df8c5010c40b64c6a}\label{class_a_d_s1118_af739fb00547d7a5df8c5010c40b64c6a}} 
+\index{A\+D\+S1118@{A\+D\+S1118}!set\+Continuous\+Mode@{set\+Continuous\+Mode}}
+\index{set\+Continuous\+Mode@{set\+Continuous\+Mode}!A\+D\+S1118@{A\+D\+S1118}}
+\subsubsection{\texorpdfstring{set\+Continuous\+Mode()}{setContinuousMode()}}
+{\footnotesize\ttfamily void A\+D\+S1118\+::set\+Continuous\+Mode (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Setting to continuous adquisition mode. 
+
+Setting to continuous adquisition mode \mbox{\Hypertarget{class_a_d_s1118_a15fcd99b88c988fef9b4cc04347b08a5}\label{class_a_d_s1118_a15fcd99b88c988fef9b4cc04347b08a5}} 
+\index{A\+D\+S1118@{A\+D\+S1118}!set\+Full\+Scale\+Range@{set\+Full\+Scale\+Range}}
+\index{set\+Full\+Scale\+Range@{set\+Full\+Scale\+Range}!A\+D\+S1118@{A\+D\+S1118}}
+\subsubsection{\texorpdfstring{set\+Full\+Scale\+Range()}{setFullScaleRange()}}
+{\footnotesize\ttfamily void A\+D\+S1118\+::set\+Full\+Scale\+Range (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{fsr }\end{DoxyParamCaption})}
+
+
+
+Setting the full scale range in the config register. 
+
+Setting the full scale range in the config register 
+\begin{DoxyParams}{Parameters}
+{\em fsr} & The full scale range\+: F\+S\+R\+\_\+6144 (±6.144V)$\ast$, F\+S\+R\+\_\+4096(±4.096V)$\ast$, F\+S\+R\+\_\+2048(±2.048V), F\+S\+R\+\_\+1024(±1.024V), F\+S\+R\+\_\+0512(±0.512V), F\+S\+R\+\_\+0256(±0.256V). ($\ast$) No more than V\+DD + 0.\+3 V must be applied to this device. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_a_d_s1118_a074c71a9eeb1d0db946f5f4b1308c69f}\label{class_a_d_s1118_a074c71a9eeb1d0db946f5f4b1308c69f}} 
+\index{A\+D\+S1118@{A\+D\+S1118}!set\+Input\+Selected@{set\+Input\+Selected}}
+\index{set\+Input\+Selected@{set\+Input\+Selected}!A\+D\+S1118@{A\+D\+S1118}}
+\subsubsection{\texorpdfstring{set\+Input\+Selected()}{setInputSelected()}}
+{\footnotesize\ttfamily void A\+D\+S1118\+::set\+Input\+Selected (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{input }\end{DoxyParamCaption})}
+
+
+
+Setting the inputs to be adquired in the config register. 
+
+Setting the inputs to be adquired in the config register. 
+\begin{DoxyParams}{Parameters}
+{\em input} & The input selected\+: Diferential inputs\+: D\+I\+F\+F\+\_\+0\+\_\+1, D\+I\+F\+F\+\_\+0\+\_\+3, D\+I\+F\+F\+\_\+1\+\_\+3, D\+I\+F\+F\+\_\+2\+\_\+3. Single ended input\+: A\+I\+N\+\_\+0, A\+I\+N\+\_\+1, A\+I\+N\+\_\+2, A\+I\+N\+\_\+3 \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_a_d_s1118_abcabaf741cc3e45e53a6967e0d113073}\label{class_a_d_s1118_abcabaf741cc3e45e53a6967e0d113073}} 
+\index{A\+D\+S1118@{A\+D\+S1118}!set\+Samplig\+Rate@{set\+Samplig\+Rate}}
+\index{set\+Samplig\+Rate@{set\+Samplig\+Rate}!A\+D\+S1118@{A\+D\+S1118}}
+\subsubsection{\texorpdfstring{set\+Samplig\+Rate()}{setSampligRate()}}
+{\footnotesize\ttfamily void A\+D\+S1118\+::set\+Samplig\+Rate (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{sampling\+Rate }\end{DoxyParamCaption})}
+
+
+
+Setting the sampling rate specified in the config register. 
+
+Setting the sampling rate specified in the config register 
+\begin{DoxyParams}{Parameters}
+{\em sampling\+Rate} & It\textquotesingle{}s the sampling rate\+: R\+A\+T\+E\+\_\+8\+S\+PS, R\+A\+T\+E\+\_\+16\+S\+PS, R\+A\+T\+E\+\_\+32\+S\+PS, R\+A\+T\+E\+\_\+64\+S\+PS, R\+A\+T\+E\+\_\+128\+S\+PS, R\+A\+T\+E\+\_\+250\+S\+PS, R\+A\+T\+E\+\_\+475\+S\+PS, R\+A\+T\+E\+\_\+860\+S\+PS \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_a_d_s1118_a9e2e456dee0ee957fe89319d12bd833c}\label{class_a_d_s1118_a9e2e456dee0ee957fe89319d12bd833c}} 
+\index{A\+D\+S1118@{A\+D\+S1118}!set\+Single\+Shot\+Mode@{set\+Single\+Shot\+Mode}}
+\index{set\+Single\+Shot\+Mode@{set\+Single\+Shot\+Mode}!A\+D\+S1118@{A\+D\+S1118}}
+\subsubsection{\texorpdfstring{set\+Single\+Shot\+Mode()}{setSingleShotMode()}}
+{\footnotesize\ttfamily void A\+D\+S1118\+::set\+Single\+Shot\+Mode (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Setting to single shot adquisition and power down mode. 
+
+Setting to single shot adquisition and power down mode 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+A\+D\+S1118.\+h\item 
+A\+D\+S1118.\+cpp\end{DoxyCompactItemize}
