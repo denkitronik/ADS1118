@@ -32,7 +32,7 @@ Connect the ADS1118 MISO (DOUT), MOSI(DIN) and SCLK pins to the MISO, MOSI and S
 | MOSI							|	DIN	  |
 | MISO							|	DOUT	  |	
 | SCLK							|	SCLK 	  |
-| 5 (change this pin to fit your needs)               |	  CS	  |
+| 5 (change this pin to fit your needs)                |	  CS	  |
 ---------------------------------------------------------------------------
 ```
 
