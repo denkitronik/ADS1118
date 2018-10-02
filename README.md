@@ -35,7 +35,7 @@ Connect the ADS1118 MISO (DOUT), MOSI(DIN) and SCLK pins to the MISO, MOSI and S
 | 5 (change this pin to fit your needs)                 |	  CS	  |
 ---------------------------------------------------------------------------
 ```
-
+![alt text](https://github.com/denkitronik/ADS1118/conexionAds1118.png)
 ```
 Run the examples provided in your Arduino IDE.
 ```
