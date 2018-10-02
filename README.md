@@ -13,7 +13,7 @@ None
 
 ### Installing
 
-Download or clone this project in the "libraries" folder of your Arduino folder.
+Download this library as zip file, then click in "Sketch" -> "Include Library" ->"Add .ZIP Library" and select the zip file downloaded.
 
 ## Running the tests
 ```
@@ -37,7 +37,8 @@ Connect the ADS1118 MISO (DOUT), MOSI(DIN) and SCLK pins to the MISO, MOSI and S
 ```
 ![alt text](https://github.com/denkitronik/ADS1118/blob/master/conexionAds1118.png)
 ```
-Run the examples provided in your Arduino IDE.
+Run the examples provided in your Arduino IDE. 
+Go to "File" -> "Examples" -> "ADS1118 library" -> "basicExampleAds1118" or "ads1118example" 
 ```
 
 ## Built With
@@ -49,8 +50,11 @@ Run the examples provided in your Arduino IDE.
 Everyone is invited to contribute
 When contributing to this repository, please first discuss the change you wish to make via issue, email, or any other method with me before making a change.
 
-## Versioning
+## Release History
+    1.0.0
+        CHANGE: Initial commit
 
+## Versioning
 I am using [SemVer](http://semver.org/) for versioning. 
 
 ## Authors
