@@ -32,8 +32,8 @@ Download this library as zip file, then click in "Sketch" -> "Include Library" -
 Go to "File" -> "Examples" -> "ADS1118 library" -> "basicExampleAds1118" or "ads1118example" 
 
 ## Example with a thermocouple
-This is the typical circuit for a "thermocouple measurement system" as shown in the TI [ADS1118 datasheet page 32] (http://www.ti.com/lit/ds/symlink/ads1118.pdf). 
-![alt text](https://github.com/denkitronik/ADS1118/blob/master/ads1118Thermocouple.png)
+This is the typical circuit for a "thermocouple measurement system" as shown in the TI [ADS1118 datasheet page 32](http://www.ti.com/lit/ds/symlink/ads1118.pdf). 
+![alt text](https://github.com/denkitronik/ADS1118/blob/master/thermocouple.png)
 
 
 ## Built With
