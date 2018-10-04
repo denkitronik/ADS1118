@@ -19,16 +19,13 @@ Download this library as zip file, then click in "Sketch" -> "Include Library" -
 1. Connect the ADS1118 in the 3.3v power supply pins of your Arduino.
 2. Connect the ADS1118 CS pin to the pin 5 of your Arduino.
 3. Connect the ADS1118 MISO (DOUT), MOSI(DIN) and SCLK pins to the MISO, MOSI and SCLK of your Arduino (search on internet "Arduino ICSP pinout").
-```
----------------------------------------------------------------------------
-|ARDUINO (ICSP PINS)		                    	|ADS1118 PINS     |
----------------------------------------------------------------------------
-| MOSI							|	DIN	  |
-| MISO							|	DOUT	  |	
-| SCLK							|	SCLK 	  |
-| 5 (change this pin to fit your needs)                 |	  CS	  |
----------------------------------------------------------------------------
-```
+|ARDUINO (ICSP PINS) |ADS1118 PINS |
+|--- |---|
+|MOSI |DIN |
+|MISO |DOUT |	
+|SCLK |SCLK |
+|5 (change this pin to fit your needs) |CS |
+
 ![alt text](https://github.com/denkitronik/ADS1118/blob/master/conexionAds1118.png)
 4. Run the examples provided in your Arduino IDE. 
 Go to "File" -> "Examples" -> "ADS1118 library" -> "basicExampleAds1118" or "ads1118example" 
