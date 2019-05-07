@@ -44,7 +44,7 @@ class ADS1118 {
         double getMilliVolts(uint8_t inputs);					///< Getting the millivolts from the specified inputs
 		double getMilliVolts();				///< Getting the millivolts from the settled inputs
         void decodeConfigRegister(union Config configRegister);	///< Decoding a configRegister structure and then print it out to the Serial port
-		void setSampligRate(uint8_t samplingRate);				///< Setting the sampling rate specified in the config register
+		void setSamplingRate(uint8_t samplingRate);				///< Setting the sampling rate specified in the config register
 		void setFullScaleRange(uint8_t fsr);///< Setting the full scale range in the config register
 		void setContinuousMode();			///< Setting to continuous adquisition mode
 		void setSingleShotMode();			///< Setting to single shot adquisition and power down mode
