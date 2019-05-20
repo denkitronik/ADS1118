@@ -40,7 +40,7 @@ class ADS1118 {
         ADS1118(uint8_t io_pin_cs, SPIClass *spi = &SPI); 		///< Constructor
         void begin();						///< This method initialize the SPI port and the config register
 		void begin(uint8_t sclk, uint8_t miso, uint8_t mosi);	///< This method initialize the SPI port and the config register
-        double getTemperature();			///< Getting the temperature in degrees celsius from the internal sensor of the ADS1118
+		double getTemperature();			///< Getting the temperature in degrees celsius from the internal sensor of the ADS1118
         uint16_t getADCValue(uint8_t inputs);					///< Getting a sample from the specified input
         double getMilliVolts(uint8_t inputs);					///< Getting the millivolts from the specified inputs
 		double getMilliVolts();				///< Getting the millivolts from the settled inputs
@@ -66,7 +66,7 @@ class ADS1118 {
         union Config configRegister;        ///< Config register
 
         //Bit constants
-		const uint16_t SCLK       = 2000000;///< ADS1118 SCLK frequency: 4000000 Hz Maximum for ADS1118
+		const uint32_t SCLK       = 2000000;///< ADS1118 SCLK frequency: 4000000 Hz Maximum for ADS1118
 		
 		// Used by "SS" bit
 		const uint8_t START_NOW   = 1;      ///< Start of conversion in single-shot mode
