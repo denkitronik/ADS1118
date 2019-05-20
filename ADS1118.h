@@ -37,8 +37,9 @@ union Config {
  */
 class ADS1118 {
     public:
-        ADS1118(uint8_t io_pin_cs); 		///< Constructor
+        ADS1118(uint8_t io_pin_cs, SPIClass *spi = &SPI); 		///< Constructor
         void begin();						///< This method initialize the SPI port and the config register
+		void begin(uint8_t sclk, uint8_t miso, uint8_t mosi);	///< This method initialize the SPI port and the config register
         double getTemperature();			///< Getting the temperature in degrees celsius from the internal sensor of the ADS1118
         uint16_t getADCValue(uint8_t inputs);					///< Getting a sample from the specified input
         double getMilliVolts(uint8_t inputs);					///< Getting the millivolts from the specified inputs
@@ -79,8 +80,8 @@ class ADS1118 {
 		const uint8_t SINGLE_SHOT = 1;      ///< Single-shot conversion and power down mode
 		
 		// Used by "PULL_UP_EN" bit
-		const uint8_t PULLUP      = 1;      ///< Internal pull-up resistor enabled for DOUT ***DEFAULT
-		const uint8_t NO_PULLUP   = 0;      ///< Internal pull-up resistor disabled
+		const uint8_t DOUT_PULLUP      = 1;      ///< Internal pull-up resistor enabled for DOUT ***DEFAULT
+		const uint8_t DOUT_NO_PULLUP   = 0;      ///< Internal pull-up resistor disabled
 		
 		// Used by "NOP" bits
 		const uint8_t VALID_CFG   = 0b01;   ///< Data will be written to Config register
@@ -110,6 +111,7 @@ class ADS1118 {
         const uint8_t RATE_860SPS = 0b111;  ///< 860 samples/s, Tconv=1.163ms	
 		
 private:
+		SPIClass *pSpi;
 		uint8_t lastSensorMode=3;			///< Last sensor mode selected (ADC_MODE or TEMP_MODE or none)
         uint8_t cs;                         ///< Chip select pin (choose one)		
 		const float pgaFSR[8] = {6.144, 4.096, 2.048, 1.024, 0.512, 0.256, 0.256, 0.256};

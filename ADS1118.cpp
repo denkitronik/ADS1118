@@ -67,8 +67,9 @@
  * Constructor of the class
  * @param io_pin_cs a byte indicating the pin to be use as the chip select pin (CS)
  */
-ADS1118::ADS1118(uint8_t io_pin_cs) {
+ADS1118::ADS1118(uint8_t io_pin_cs, SPIClass *spi) {
     cs = io_pin_cs;
+	pSpi = spi;
 }
 
 /**
@@ -77,9 +78,16 @@ ADS1118::ADS1118(uint8_t io_pin_cs) {
 void ADS1118::begin() {
     pinMode(cs, OUTPUT);
 	digitalWrite(cs, HIGH);
-    SPI.begin();
-    SPI.beginTransaction(SPISettings(SCLK, MSBFIRST, SPI_MODE1));
-	configRegister.bits={RESERVED, VALID_CFG, PULLUP, ADC_MODE, RATE_8SPS, SINGLE_SHOT, FSR_0256, DIFF_0_1, START_NOW}; //Default values
+    pSpi->begin();
+	configRegister.bits={RESERVED, VALID_CFG, DOUT_PULLUP, ADC_MODE, RATE_8SPS, SINGLE_SHOT, FSR_0256, DIFF_0_1, START_NOW}; //Default values
+    DEBUG_BEGIN(configRegister); //Debug this method: print the config register in the Serial port
+}
+
+void ADS1118::begin(uint8_t sclk, uint8_t miso, uint8_t mosi) {
+    pinMode(cs, OUTPUT);
+	digitalWrite(cs, HIGH);
+    pSpi->begin(sclk, miso, mosi, cs);
+	configRegister.bits={RESERVED, VALID_CFG, DOUT_PULLUP, ADC_MODE, RATE_8SPS, SINGLE_SHOT, FSR_0256, DIFF_0_1, START_NOW}; //Default values
     DEBUG_BEGIN(configRegister); //Debug this method: print the config register in the Serial port
 }
 
@@ -97,12 +105,14 @@ uint16_t ADS1118::getADCValue(uint8_t inputs) {
 		configRegister.bits.sensorMode=ADC_MODE; //Sorry but we will have to read twice the sensor
 	configRegister.bits.mux=inputs;
     do{	
+		pSpi->beginTransaction(SPISettings(SCLK, MSBFIRST, SPI_MODE1));
 		digitalWrite(cs, LOW);
-		dataMSB = SPI.transfer(configRegister.byte.msb);
-		dataLSB = SPI.transfer(configRegister.byte.lsb);
-		configMSB = SPI.transfer(configRegister.byte.msb);
-		configLSB = SPI.transfer(configRegister.byte.lsb);
+		dataMSB = pSpi->transfer(configRegister.byte.msb);
+		dataLSB = pSpi->transfer(configRegister.byte.lsb);
+		configMSB = pSpi->transfer(configRegister.byte.msb);
+		configLSB = pSpi->transfer(configRegister.byte.lsb);
 		digitalWrite(cs, HIGH);
+		pSpi->endTransaction();
 		for(int i=0;i<CONV_TIME[configRegister.bits.rate];i++) //Lets wait the conversion time
 			delayMicroseconds(1000);
 		count++;
@@ -163,12 +173,14 @@ double ADS1118::getTemperature() {
 	else
 		configRegister.bits.sensorMode=TEMP_MODE; //Sorry but we will have to read twice the sensor
     do{
+		pSpi->beginTransaction(SPISettings(SCLK, MSBFIRST, SPI_MODE1));
 		digitalWrite(cs, LOW);
-		dataMSB = SPI.transfer(configRegister.byte.msb);
-		dataLSB = SPI.transfer(configRegister.byte.lsb);
-		configMSB = SPI.transfer(configRegister.byte.msb);
-		configLSB = SPI.transfer(configRegister.byte.lsb);
+		dataMSB = pSpi->transfer(configRegister.byte.msb);
+		dataLSB = pSpi->transfer(configRegister.byte.lsb);
+		configMSB = pSpi->transfer(configRegister.byte.msb);
+		configLSB = pSpi->transfer(configRegister.byte.lsb);
 		digitalWrite(cs, HIGH);
+		pSpi->endTransaction();
 		for(int i=0;i<CONV_TIME[configRegister.bits.rate];i++) //Lets wait the conversion time
 			delayMicroseconds(1000);
 		count++;
@@ -224,14 +236,14 @@ void ADS1118::setSingleShotMode(){
  * Disabling the internal pull-up resistor of the DOUT pin
  */
 void ADS1118::disablePullup(){
-	configRegister.bits.operatingMode=NO_PULLUP;
+	configRegister.bits.operatingMode=DOUT_NO_PULLUP;
 }
 
 /**
  * Enabling the internal pull-up resistor of the DOUT pin
  */
 void ADS1118::enablePullup(){
-	configRegister.bits.operatingMode=PULLUP;
+	configRegister.bits.operatingMode=DOUT_PULLUP;
 }
 
 /**
