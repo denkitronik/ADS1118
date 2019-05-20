@@ -92,6 +92,30 @@ void ADS1118::begin(uint8_t sclk, uint8_t miso, uint8_t mosi) {
 }
 
 /**
+ * Getting a sample from the specified input if data is ready
+ * @param pin_drdy io pin connected to ADS1118 DOUT/DRDY. value Reference of ADC value to be fetched
+ * @return True if ADC data is ready
+ */
+bool ADS1118::getADCValueNoWait(uint8_t pin_drdy, uint16_t &value) {
+    byte dataMSB, dataLSB;	
+	pSpi->beginTransaction(SPISettings(SCLK, MSBFIRST, SPI_MODE1));
+	digitalWrite(cs, LOW);
+	if (digitalRead(pin_drdy)) {
+		digitalWrite(cs, HIGH);
+		pSpi->endTransaction();
+		return false;
+	}
+
+	dataMSB = pSpi->transfer(configRegister.byte.msb);
+	dataLSB = pSpi->transfer(configRegister.byte.lsb);
+	digitalWrite(cs, HIGH);
+	pSpi->endTransaction();
+
+	value = (dataMSB << 8) | (dataLSB);
+    return true;
+}
+
+/**
  * Getting a sample from the specified input
  * @param inputs Sets the input of the ADC: Diferential inputs: DIFF_0_1, DIFF_0_3, DIFF_1_3, DIFF_2_3. Single ended input: AIN_0, AIN_1, AIN_2, AIN_3
  * @return A word containing the ADC value
@@ -159,6 +183,25 @@ double ADS1118::getMilliVolts() {
 		volts=(float)(value*fsr/32768);
 	}
     return volts*1000;
+}
+
+/**
+ * Getting the millivolts from the settled inputs
+ * @return A double (32bits) containing the ADC value in millivolts
+ */
+bool ADS1118::getMilliVoltsNoWait(uint8_t pin_drdy, double &volts) {
+    float fsr = pgaFSR[configRegister.bits.pga];
+	uint16_t value;
+	bool dataReady=getADCValueNoWait(pin_drdy, value);
+	if (!dataReady) return false;
+	if(value>=0x8000){
+		value=((~value)+1); //Applying binary twos complement format
+		volts=((float)(value*fsr/32768)*-1);
+	} else {
+		volts=(float)(value*fsr/32768);
+	}
+    volts = volts*1000;
+	return true;
 }
 
 /**

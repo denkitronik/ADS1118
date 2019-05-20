@@ -42,6 +42,8 @@ class ADS1118 {
 		void begin(uint8_t sclk, uint8_t miso, uint8_t mosi);	///< This method initialize the SPI port and the config register
 		double getTemperature();			///< Getting the temperature in degrees celsius from the internal sensor of the ADS1118
         uint16_t getADCValue(uint8_t inputs);					///< Getting a sample from the specified input
+		bool getADCValueNoWait(uint8_t pin_drdy, uint16_t &value);
+		bool getMilliVoltsNoWait(uint8_t pin_drdy, double &volts); ///< Getting the millivolts from the settled inputs
         double getMilliVolts(uint8_t inputs);					///< Getting the millivolts from the specified inputs
 		double getMilliVolts();				///< Getting the millivolts from the settled inputs
         void decodeConfigRegister(union Config configRegister);	///< Decoding a configRegister structure and then print it out to the Serial port
