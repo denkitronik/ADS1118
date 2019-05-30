@@ -9,44 +9,44 @@
 #######################################
 # Datatypes (KEYWORD1)
 #######################################
-ADS1118		KEYWORD1
+ADS1118	KEYWORD1
 
 #######################################
 # Methods and Functions (KEYWORD2)
 #######################################
-getTemperature		KEYWORD2
-getADCValue		KEYWORD2
-getMilliVolts		KEYWORD2
+getTemperature	KEYWORD2
+getADCValue	KEYWORD2
+getMilliVolts	KEYWORD2
 decodeConfigRegister	KEYWORD2
-setSampligRate		KEYWORD2
+setSampligRate	KEYWORD2
 setFullScaleRange	KEYWORD2
 setContinuousMode	KEYWORD2
 setSingleShotMode	KEYWORD2
-disablePullup		KEYWORD2
-enablePullup		KEYWORD2
+disablePullup	KEYWORD2
+enablePullup	KEYWORD2
 setInputSelected	KEYWORD2
 
 ######################################
 # Constants (LITERAL1)
 #######################################
 INPUT_PULLDOWN_16	LITERAL1
-PWMRANGE LITERAL1
+PWMRANGE	LITERAL1
 
 DIFF_0_1	LITERAL1
 DIFF_0_3	LITERAL1
 DIFF_1_3	LITERAL1
 DIFF_2_3	LITERAL1
-AIN_0		LITERAL1
-AIN_1		LITERAL1
-AIN_2		LITERAL1
-AIN_3		LITERAL1
-SCLK		LITERAL1
+AIN_0	LITERAL1
+AIN_1	LITERAL1
+AIN_2	LITERAL1
+AIN_3	LITERAL1
+SCLK	LITERAL1
 START_NOW	LITERAL1
 ADC_MODE	LITERAL1
 TEMP_MODE	LITERAL1
 CONTINUOUS	LITERAL1
 SINGLE_SHOT	LITERAL1
-PULLUP		LITERAL1
+PULLUP	LITERAL1
 NO_PULLUP	LITERAL1
 VALID_CFG	LITERAL1
 NO_VALID_CFG	LITERAL1
@@ -65,7 +65,7 @@ RATE_128SPS	LITERAL1
 RATE_250SPS	LITERAL1
 RATE_475SPS	LITERAL1
 RATE_860SPS	LITERAL1
-pgaFSR		LITERAL1
+pgaFSR	LITERAL1
 
 #######################################
 # Built-In Variables (LITERAL2)
@@ -73,4 +73,4 @@ pgaFSR		LITERAL1
 
 configRegister	LITERAL2
 lastSensorMode	LITERAL2
-cs		LITERAL2
+cs	LITERAL2
