@@ -241,7 +241,7 @@ double ADS1118::getTemperature() {
  * Setting the sampling rate specified in the config register
  * @param samplingRate It's the sampling rate: RATE_8SPS, RATE_16SPS, RATE_32SPS, RATE_64SPS, RATE_128SPS, RATE_250SPS, RATE_475SPS, RATE_860SPS
  */
-void ADS1118::setSampligRate(uint8_t samplingRate){
+void ADS1118::setSamplingRate(uint8_t samplingRate){
 	configRegister.bits.rate=samplingRate;
 }
 
