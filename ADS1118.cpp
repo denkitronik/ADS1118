@@ -67,8 +67,9 @@
  * Constructor of the class
  * @param io_pin_cs a byte indicating the pin to be use as the chip select pin (CS)
  */
-ADS1118::ADS1118(uint8_t io_pin_cs) {
+ADS1118::ADS1118(uint8_t io_pin_cs, SPIClass *spi) {
     cs = io_pin_cs;
+	pSpi = spi;
 }
 
 /**
@@ -77,10 +78,41 @@ ADS1118::ADS1118(uint8_t io_pin_cs) {
 void ADS1118::begin() {
     pinMode(cs, OUTPUT);
 	digitalWrite(cs, HIGH);
-    SPI.begin();
-    SPI.beginTransaction(SPISettings(SCLK, MSBFIRST, SPI_MODE1));
-	configRegister.bits={RESERVED, VALID_CFG, PULLUP, ADC_MODE, RATE_8SPS, SINGLE_SHOT, FSR_0256, DIFF_0_1, START_NOW}; //Default values
+    pSpi->begin();
+	configRegister.bits={RESERVED, VALID_CFG, DOUT_PULLUP, ADC_MODE, RATE_8SPS, SINGLE_SHOT, FSR_0256, DIFF_0_1, START_NOW}; //Default values
     DEBUG_BEGIN(configRegister); //Debug this method: print the config register in the Serial port
+}
+
+void ADS1118::begin(uint8_t sclk, uint8_t miso, uint8_t mosi) {
+    pinMode(cs, OUTPUT);
+	digitalWrite(cs, HIGH);
+    pSpi->begin(sclk, miso, mosi, cs);
+	configRegister.bits={RESERVED, VALID_CFG, DOUT_PULLUP, ADC_MODE, RATE_8SPS, SINGLE_SHOT, FSR_0256, DIFF_0_1, START_NOW}; //Default values
+    DEBUG_BEGIN(configRegister); //Debug this method: print the config register in the Serial port
+}
+
+/**
+ * Getting a sample from the specified input if data is ready
+ * @param pin_drdy io pin connected to ADS1118 DOUT/DRDY. value Reference of ADC value to be fetched
+ * @return True if ADC data is ready
+ */
+bool ADS1118::getADCValueNoWait(uint8_t pin_drdy, uint16_t &value) {
+    byte dataMSB, dataLSB;	
+	pSpi->beginTransaction(SPISettings(SCLK, MSBFIRST, SPI_MODE1));
+	digitalWrite(cs, LOW);
+	if (digitalRead(pin_drdy)) {
+		digitalWrite(cs, HIGH);
+		pSpi->endTransaction();
+		return false;
+	}
+
+	dataMSB = pSpi->transfer(configRegister.byte.msb);
+	dataLSB = pSpi->transfer(configRegister.byte.lsb);
+	digitalWrite(cs, HIGH);
+	pSpi->endTransaction();
+
+	value = (dataMSB << 8) | (dataLSB);
+    return true;
 }
 
 /**
@@ -97,12 +129,14 @@ uint16_t ADS1118::getADCValue(uint8_t inputs) {
 		configRegister.bits.sensorMode=ADC_MODE; //Sorry but we will have to read twice the sensor
 	configRegister.bits.mux=inputs;
     do{	
+		pSpi->beginTransaction(SPISettings(SCLK, MSBFIRST, SPI_MODE1));
 		digitalWrite(cs, LOW);
-		dataMSB = SPI.transfer(configRegister.byte.msb);
-		dataLSB = SPI.transfer(configRegister.byte.lsb);
-		configMSB = SPI.transfer(configRegister.byte.msb);
-		configLSB = SPI.transfer(configRegister.byte.lsb);
+		dataMSB = pSpi->transfer(configRegister.byte.msb);
+		dataLSB = pSpi->transfer(configRegister.byte.lsb);
+		configMSB = pSpi->transfer(configRegister.byte.msb);
+		configLSB = pSpi->transfer(configRegister.byte.lsb);
 		digitalWrite(cs, HIGH);
+		pSpi->endTransaction();
 		for(int i=0;i<CONV_TIME[configRegister.bits.rate];i++) //Lets wait the conversion time
 			delayMicroseconds(1000);
 		count++;
@@ -152,6 +186,25 @@ double ADS1118::getMilliVolts() {
 }
 
 /**
+ * Getting the millivolts from the settled inputs
+ * @return A double (32bits) containing the ADC value in millivolts
+ */
+bool ADS1118::getMilliVoltsNoWait(uint8_t pin_drdy, double &volts) {
+    float fsr = pgaFSR[configRegister.bits.pga];
+	uint16_t value;
+	bool dataReady=getADCValueNoWait(pin_drdy, value);
+	if (!dataReady) return false;
+	if(value>=0x8000){
+		value=((~value)+1); //Applying binary twos complement format
+		volts=((float)(value*fsr/32768)*-1);
+	} else {
+		volts=(float)(value*fsr/32768);
+	}
+    volts = volts*1000;
+	return true;
+}
+
+/**
  * Getting the temperature in degrees celsius from the internal sensor of the ADS1118
  * @return A double (32bits) containing the temperature in degrees celsius of the internal sensor
  */
@@ -163,12 +216,14 @@ double ADS1118::getTemperature() {
 	else
 		configRegister.bits.sensorMode=TEMP_MODE; //Sorry but we will have to read twice the sensor
     do{
+		pSpi->beginTransaction(SPISettings(SCLK, MSBFIRST, SPI_MODE1));
 		digitalWrite(cs, LOW);
-		dataMSB = SPI.transfer(configRegister.byte.msb);
-		dataLSB = SPI.transfer(configRegister.byte.lsb);
-		configMSB = SPI.transfer(configRegister.byte.msb);
-		configLSB = SPI.transfer(configRegister.byte.lsb);
+		dataMSB = pSpi->transfer(configRegister.byte.msb);
+		dataLSB = pSpi->transfer(configRegister.byte.lsb);
+		configMSB = pSpi->transfer(configRegister.byte.msb);
+		configLSB = pSpi->transfer(configRegister.byte.lsb);
 		digitalWrite(cs, HIGH);
+		pSpi->endTransaction();
 		for(int i=0;i<CONV_TIME[configRegister.bits.rate];i++) //Lets wait the conversion time
 			delayMicroseconds(1000);
 		count++;
@@ -224,14 +279,14 @@ void ADS1118::setSingleShotMode(){
  * Disabling the internal pull-up resistor of the DOUT pin
  */
 void ADS1118::disablePullup(){
-	configRegister.bits.operatingMode=NO_PULLUP;
+	configRegister.bits.operatingMode=DOUT_NO_PULLUP;
 }
 
 /**
  * Enabling the internal pull-up resistor of the DOUT pin
  */
 void ADS1118::enablePullup(){
-	configRegister.bits.operatingMode=PULLUP;
+	configRegister.bits.operatingMode=DOUT_PULLUP;
 }
 
 /**
