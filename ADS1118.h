@@ -3,7 +3,7 @@
 
 #include "Arduino.h"
 #include <SPI.h>
-
+#include <stdint.h>
 /**
 * Union representing the "config register" in 3 ways: 
 * bits, word (16 bits) and nibbles (4 bits)
@@ -37,30 +37,34 @@ union Config {
  */
 class ADS1118 {
     public:
+        void begin();				///< This method initialize the SPI port and the config register
+#if defined(__AVR__)
+        ADS1118(uint8_t io_pin_cs);         ///< Constructor
+#elif defined(ESP32)
         ADS1118(uint8_t io_pin_cs, SPIClass *spi = &SPI); 		///< Constructor
-        void begin();						///< This method initialize the SPI port and the config register
-		void begin(uint8_t sclk, uint8_t miso, uint8_t mosi);	///< This method initialize the SPI port and the config register
-		double getTemperature();			///< Getting the temperature in degrees celsius from the internal sensor of the ADS1118
+	void begin(uint8_t sclk, uint8_t miso, uint8_t mosi);	///< This method initialize the SPI port and the config register        
+#endif
+	double getTemperature();			///< Getting the temperature in degrees celsius from the internal sensor of the ADS1118
         uint16_t getADCValue(uint8_t inputs);					///< Getting a sample from the specified input
-		bool getADCValueNoWait(uint8_t pin_drdy, uint16_t &value);
-		bool getMilliVoltsNoWait(uint8_t pin_drdy, double &volts); ///< Getting the millivolts from the settled inputs
+	bool getADCValueNoWait(uint8_t pin_drdy, uint16_t &value);
+	bool getMilliVoltsNoWait(uint8_t pin_drdy, double &volts); ///< Getting the millivolts from the settled inputs
         double getMilliVolts(uint8_t inputs);					///< Getting the millivolts from the specified inputs
-		double getMilliVolts();				///< Getting the millivolts from the settled inputs
+	double getMilliVolts();				///< Getting the millivolts from the settled inputs
         void decodeConfigRegister(union Config configRegister);	///< Decoding a configRegister structure and then print it out to the Serial port
-		void setSamplingRate(uint8_t samplingRate);				///< Setting the sampling rate specified in the config register
-		void setFullScaleRange(uint8_t fsr);///< Setting the full scale range in the config register
-		void setContinuousMode();			///< Setting to continuous adquisition mode
-		void setSingleShotMode();			///< Setting to single shot adquisition and power down mode
-		void disablePullup();				///< Disabling the internal pull-up resistor of the DOUT pin
-		void enablePullup();				///< Enabling the internal pull-up resistor of the DOUT pin
-		void setInputSelected(uint8_t input);///< Setting the inputs to be adquired in the config register.
-		//Input multiplexer configuration selection for bits "MUX"
-			//Differential inputs
+	void setSamplingRate(uint8_t samplingRate);				///< Setting the sampling rate specified in the config register
+	void setFullScaleRange(uint8_t fsr);///< Setting the full scale range in the config register
+	void setContinuousMode();			///< Setting to continuous adquisition mode
+	void setSingleShotMode();			///< Setting to single shot adquisition and power down mode
+	void disablePullup();				///< Disabling the internal pull-up resistor of the DOUT pin
+	void enablePullup();				///< Enabling the internal pull-up resistor of the DOUT pin
+	void setInputSelected(uint8_t input);///< Setting the inputs to be adquired in the config register.
+	//Input multiplexer configuration selection for bits "MUX"
+	//Differential inputs
         const uint8_t DIFF_0_1 	  = 0b000; 	///< Differential input: Vin=A0-A1
-		const uint8_t DIFF_0_3 	  = 0b001; 	///< Differential input: Vin=A0-A3
-		const uint8_t DIFF_1_3 	  = 0b010; 	///< Differential input: Vin=A1-A3
+	const uint8_t DIFF_0_3 	  = 0b001; 	///< Differential input: Vin=A0-A3
+	const uint8_t DIFF_1_3 	  = 0b010; 	///< Differential input: Vin=A1-A3
         const uint8_t DIFF_2_3 	  = 0b011; 	///< Differential input: Vin=A2-A3   
-			//Single ended inputs
+	//Single ended inputs
         const uint8_t AIN_0 	  = 0b100;  ///< Single ended input: Vin=A0
         const uint8_t AIN_1		  = 0b101;	///< Single ended input: Vin=A1
         const uint8_t AIN_2 	  = 0b110;	///< Single ended input: Vin=A2
@@ -68,29 +72,29 @@ class ADS1118 {
         union Config configRegister;        ///< Config register
 
         //Bit constants
-		const uint32_t SCLK       = 2000000;///< ADS1118 SCLK frequency: 4000000 Hz Maximum for ADS1118
+	const uint32_t SCLK       = 2000000;///< ADS1118 SCLK frequency: 4000000 Hz Maximum for ADS1118
 		
-		// Used by "SS" bit
-		const uint8_t START_NOW   = 1;      ///< Start of conversion in single-shot mode
+	// Used by "SS" bit
+	const uint8_t START_NOW   = 1;      ///< Start of conversion in single-shot mode
+	
+	// Used by "TS_MODE" bit
+	const uint8_t ADC_MODE    = 0;      ///< External (inputs) voltage reading mode
+	const uint8_t TEMP_MODE   = 1;      ///< Internal temperature sensor reading mode
 		
-		// Used by "TS_MODE" bit
-		const uint8_t ADC_MODE    = 0;      ///< External (inputs) voltage reading mode
-		const uint8_t TEMP_MODE   = 1;      ///< Internal temperature sensor reading mode
+	// Used by "MODE" bit
+	const uint8_t CONTINUOUS  = 0;      ///< Continuous conversion mode
+	const uint8_t SINGLE_SHOT = 1;      ///< Single-shot conversion and power down mode
 		
-		// Used by "MODE" bit
-		const uint8_t CONTINUOUS  = 0;      ///< Continuous conversion mode
-		const uint8_t SINGLE_SHOT = 1;      ///< Single-shot conversion and power down mode
+	// Used by "PULL_UP_EN" bit
+	const uint8_t DOUT_PULLUP  = 1;      ///< Internal pull-up resistor enabled for DOUT ***DEFAULT
+	const uint8_t DOUT_NO_PULLUP   = 0;      ///< Internal pull-up resistor disabled
 		
-		// Used by "PULL_UP_EN" bit
-		const uint8_t DOUT_PULLUP      = 1;      ///< Internal pull-up resistor enabled for DOUT ***DEFAULT
-		const uint8_t DOUT_NO_PULLUP   = 0;      ///< Internal pull-up resistor disabled
+	// Used by "NOP" bits
+	const uint8_t VALID_CFG   = 0b01;   ///< Data will be written to Config register
+	const uint8_t NO_VALID_CFG= 0b00;   ///< Data won't be written to Config register
 		
-		// Used by "NOP" bits
-		const uint8_t VALID_CFG   = 0b01;   ///< Data will be written to Config register
-		const uint8_t NO_VALID_CFG= 0b00;   ///< Data won't be written to Config register
-		
-		// Used by "Reserved" bit
-		const uint8_t RESERVED    = 1;      ///< Its value is always 1, reserved
+	// Used by "Reserved" bit
+	const uint8_t RESERVED    = 1;      ///< Its value is always 1, reserved
 
         /*Full scale range (FSR) selection by "PGA" bits. 
 		 [Warning: this could increase the noise and the effective number of bits (ENOB). See tables above]*/
@@ -113,11 +117,13 @@ class ADS1118 {
         const uint8_t RATE_860SPS = 0b111;  ///< 860 samples/s, Tconv=1.163ms	
 		
 private:
-		SPIClass *pSpi;
-		uint8_t lastSensorMode=3;			///< Last sensor mode selected (ADC_MODE or TEMP_MODE or none)
+#if defined(ESP32)
+	SPIClass *pSpi;
+#endif  
+	uint8_t lastSensorMode=3;			///< Last sensor mode selected (ADC_MODE or TEMP_MODE or none)
         uint8_t cs;                         ///< Chip select pin (choose one)		
-		const float pgaFSR[8] = {6.144, 4.096, 2.048, 1.024, 0.512, 0.256, 0.256, 0.256};
-		const uint8_t CONV_TIME[8]={125, 63, 32, 16, 8, 4, 3, 2}; 	///< Array containing the conversions time in ms
+	const float pgaFSR[8] = {6.144, 4.096, 2.048, 1.024, 0.512, 0.256, 0.256, 0.256};
+	const uint8_t CONV_TIME[8]={125, 63, 32, 16, 8, 4, 3, 2}; 	///< Array containing the conversions time in ms
 
 /*
 							Table 1. Noise in μVRMS (μVPP) at VDD = 3.3 V   [1]
