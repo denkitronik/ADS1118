@@ -22,7 +22,7 @@ void setup(){
     ads1118.begin(); //Initialize the ADS1118. Default setting: PULLUP RESISTOR, ADC MODE, RATE 8SPS, SINGLE SHOT, ±0.256V, DIFFERENTIAL AIN0-AIN1
 
     /* Changing the sampling rate. RATE_8SPS, RATE_16SPS, RATE_32SPS, RATE_64SPS, RATE_128SPS, RATE_250SPS, RATE_475SPS, RATE_860SPS*/
-    ads1118.setSampligRate(ads1118.RATE_8SPS);
+    ads1118.setSamplingRate(ads1118.RATE_8SPS);
 
     /* Changing the input selected. Differential inputs: DIFF_0_1, DIFF_0_3, DIFF_1_3, DIFF_2_3. Single ended input: AIN_0, AIN_1, AIN_2, AIN_3*/
     ads1118.setInputSelected(ads1118.DIFF_0_1);

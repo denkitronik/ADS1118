@@ -29,7 +29,7 @@ void setup(){
 
     /* Changing the sampling rate. 
        Available values: RATE_8SPS, RATE_16SPS, RATE_32SPS, RATE_64SPS, RATE_128SPS, RATE_250SPS, RATE_475SPS, RATE_860SPS */
-    ads1118.setSampligRate(ads1118.RATE_8SPS);              //Using the setter method to change the sampling rate
+    ads1118.setSamplingRate(ads1118.RATE_8SPS);             //Using the setter method to change the sampling rate
     //ads1118.configRegister.bits.rate=ads1118.RATE_8SPS;   //Driving the config register directly. Uncomment if you want to use this way
 
     /* Changing the input selected. 
