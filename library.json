@@ -1,7 +1,7 @@
 {
 	"name": "ADS1118 library",
-	"version": "1.0.0",
-	"frameworks": "AVR",
+	"version": "1.0.3",
+	"frameworks": "Arduino",
 	"license": "MIT",
 	"keywords": "ADS1118, SPI, ADC, 16-BIT",
 	"description": "Arduino library for TI ADS1118 (16-Bit Analog-to-Digital Converter with Internal Reference and Temperature Sensor).",
