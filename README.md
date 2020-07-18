@@ -48,6 +48,9 @@ When contributing to this repository, please first discuss the change you wish t
 ## Release History
     1.0.0
         CHANGE: Initial commit
+    1.0.4
+        CHANGE: Fixed bug with timing which would cause samples to be missed.
+        CHANGE: Simplifyed code and tested on ESP8266.
 
 ## Versioning
 I am using [SemVer](http://semver.org/) for versioning. 
@@ -55,6 +58,7 @@ I am using [SemVer](http://semver.org/) for versioning.
 ## Authors
 
 * **Alvaro Salazar** - *Initial work* - [alvaro-salazar](https://github.com/alvaro-salazar)
+* **Nicholas Klopfer-Webber** - *Bug fixes and ESP8266 testing* - [ottago](https://github.com/ottago)
 
 ## License
 

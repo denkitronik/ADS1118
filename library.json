@@ -1,6 +1,6 @@
 {
 	"name": "ADS1118 library",
-	"version": "1.0.3",
+	"version": "1.0.4",
 	"frameworks": "Arduino",
 	"license": "MIT",
 	"keywords": "ADS1118, SPI, ADC, 16-BIT",
