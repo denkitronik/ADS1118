@@ -73,7 +73,7 @@
 ADS1118::ADS1118(uint8_t io_pin_cs) {
     cs = io_pin_cs;
 }						///< This method initialize the SPI port and the config register        
-#elif defined(ESP32)
+#elif defined(ESP32) || defined(ESP8266)
 /**
  * Constructor of the class
  * @param io_pin_cs a byte indicating the pin to be use as the chip select pin (CS)
@@ -98,6 +98,15 @@ void ADS1118::begin() {
     DEBUG_BEGIN(configRegister); //Debug this method: print the config register in the Serial port
 }						///< This method initialize the SPI port and the config register        
 #elif defined(ESP32)
+void ADS1118::begin(uint8_t sclk, uint8_t miso, uint8_t mosi) {
+    pinMode(cs, OUTPUT);
+	digitalWrite(cs, HIGH);
+    pSpi->begin(sclk, miso, mosi, cs);
+	configRegister.bits={RESERVED, VALID_CFG, DOUT_PULLUP, ADC_MODE, RATE_8SPS, SINGLE_SHOT, FSR_0256, DIFF_0_1, START_NOW}; //Default values
+    DEBUG_BEGIN(configRegister); //Debug this method: print the config register in the Serial port
+}
+#endif
+#if defined(ESP32) || defined(ESP8266)
 /**
  * This method initialize the SPI port and the config register
  */
@@ -107,16 +116,7 @@ void ADS1118::begin() {
     pSpi->begin();
     configRegister.bits={RESERVED, VALID_CFG, DOUT_PULLUP, ADC_MODE, RATE_8SPS, SINGLE_SHOT, FSR_0256, DIFF_0_1, START_NOW}; //Default values
     DEBUG_BEGIN(configRegister); //Debug this method: print the config register in the Serial port
-}      
-
-void ADS1118::begin(uint8_t sclk, uint8_t miso, uint8_t mosi) {
-    pinMode(cs, OUTPUT);
-	digitalWrite(cs, HIGH);
-    pSpi->begin(sclk, miso, mosi, cs);
-	configRegister.bits={RESERVED, VALID_CFG, DOUT_PULLUP, ADC_MODE, RATE_8SPS, SINGLE_SHOT, FSR_0256, DIFF_0_1, START_NOW}; //Default values
-    DEBUG_BEGIN(configRegister); //Debug this method: print the config register in the Serial port
 }
-
 
 /**
  * Getting a sample from the specified input if data is ready
@@ -172,13 +172,14 @@ bool ADS1118::getMilliVoltsNoWait(uint8_t pin_drdy, double &volts) {
 uint16_t ADS1118::getADCValue(uint8_t inputs) {
     uint16_t value;
     byte dataMSB, dataLSB, configMSB, configLSB, count=0;
-	if(lastSensorMode==ADC_MODE)  //Lucky you! We don't have to read twice the sensor
+	if(lastSensorMode==ADC_MODE){  //Lucky you! We don't have to read twice the sensor
 		count=1;
-	else
-	configRegister.bits.sensorMode=ADC_MODE; //Sorry but we will have to read twice the sensor
+	} else {
+	    configRegister.bits.sensorMode=ADC_MODE; //Sorry but we will have to read twice the sensor
+    }
 	configRegister.bits.mux=inputs;
     do{
-#if defined(ESP32)
+#if defined(ESP32) || defined(ESP8266)
 	pSpi->beginTransaction(SPISettings(SCLK, MSBFIRST, SPI_MODE1));
 #endif        
 	digitalWrite(cs, LOW);
@@ -187,7 +188,7 @@ uint16_t ADS1118::getADCValue(uint8_t inputs) {
         dataLSB = SPI.transfer(configRegister.byte.lsb);
         configMSB = SPI.transfer(configRegister.byte.msb);
         configLSB = SPI.transfer(configRegister.byte.lsb);        
-#elif defined(ESP32)
+#elif defined(ESP32) || defined(ESP8266)
         dataMSB = pSpi->transfer(configRegister.byte.msb);
 	dataLSB = pSpi->transfer(configRegister.byte.lsb);
 	configMSB = pSpi->transfer(configRegister.byte.msb);
@@ -199,8 +200,8 @@ uint16_t ADS1118::getADCValue(uint8_t inputs) {
 #if defined(ESP32)        
 	pSpi->endTransaction();
 #endif         
-	for(int i=0;i<CONV_TIME[configRegister.bits.rate];i++) //Lets wait the conversion time
-            delayMicroseconds(1000);
+	for(int i=0;i<CONV_TIME[configRegister.bits.rate];i++) {//Lets wait the conversion time
+            delayMicroseconds(1000); }
             count++;
 	}while (count<=1);  //We make two readings because the second reading is the ADC conversion.	
         DEBUG_GETADCVALUE(configRegister);  //Debug this method: print the config register in the Serial port
@@ -256,12 +257,13 @@ double ADS1118::getMilliVolts() {
 double ADS1118::getTemperature() {
     uint16_t convRegister;
     uint8_t dataMSB, dataLSB, configMSB, configLSB, count=0;
-    if(lastSensorMode==TEMP_MODE)
+    if(lastSensorMode==TEMP_MODE){
         count=1;  //Lucky you! We don't have to read twice the sensor
-    else
-	configRegister.bits.sensorMode=TEMP_MODE; //Sorry but we will have to read twice the sensor
+    } else {
+	    configRegister.bits.sensorMode=TEMP_MODE; //Sorry but we will have to read twice the sensor
+    } 
     do{
-#if defined(ESP32)
+#if defined(ESP32) || defined(ESP8266)
 	pSpi->beginTransaction(SPISettings(SCLK, MSBFIRST, SPI_MODE1));
 #endif
 	digitalWrite(cs, LOW);
@@ -271,18 +273,18 @@ double ADS1118::getTemperature() {
         dataLSB = SPI.transfer(configRegister.byte.lsb);
         configMSB = SPI.transfer(configRegister.byte.msb);
         configLSB = SPI.transfer(configRegister.byte.lsb);        
-#elif defined(ESP32)
+#elif defined(ESP32) || defined(ESP8266)
         dataMSB = pSpi->transfer(configRegister.byte.msb);
 	dataLSB = pSpi->transfer(configRegister.byte.lsb);
 	configMSB = pSpi->transfer(configRegister.byte.msb);
 	configLSB = pSpi->transfer(configRegister.byte.lsb);        
 #endif
 	digitalWrite(cs, HIGH);
-#if defined(ESP32)
+#if defined(ESP32) || defined(ESP8266)
 	pSpi->endTransaction();
 #endif
-	for(int i=0;i<CONV_TIME[configRegister.bits.rate];i++) //Lets wait the conversion time
-            delayMicroseconds(1000);
+	for(int i=0;i<CONV_TIME[configRegister.bits.rate];i++){ //Lets wait the conversion time
+            delayMicroseconds(1000); }
         count++;
     }while (count<=1);  //We make two readings because the second reading is the temperature.
     DEBUG_GETTEMPERATURE(configRegister);  //Debug this method: print the config register in the Serial port

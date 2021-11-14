@@ -40,8 +40,10 @@ class ADS1118 {
         void begin();				///< This method initialize the SPI port and the config register
 #if defined(__AVR__)
         ADS1118(uint8_t io_pin_cs);         ///< Constructor
-#elif defined(ESP32)
+#elif defined(ESP32) || defined(ESP8266)
         ADS1118(uint8_t io_pin_cs, SPIClass *spi = &SPI); 		///< Constructor
+#endif
+#if defined(ESP32)
 	void begin(uint8_t sclk, uint8_t miso, uint8_t mosi);	///< This method initialize the SPI port and the config register        
 #endif
 	double getTemperature();			///< Getting the temperature in degrees celsius from the internal sensor of the ADS1118
@@ -117,7 +119,7 @@ class ADS1118 {
         const uint8_t RATE_860SPS = 0b111;  ///< 860 samples/s, Tconv=1.163ms	
 		
 private:
-#if defined(ESP32)
+#if defined(ESP32) || defined(ESP8266)
 	SPIClass *pSpi;
 #endif  
 	uint8_t lastSensorMode=3;			///< Last sensor mode selected (ADC_MODE or TEMP_MODE or none)
